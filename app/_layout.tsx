@@ -18,10 +18,15 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  // const [loaded, error] = useFonts({
+  //   "mon-regular": require("../assets/fonts/Montserrat-Regular.ttf"),
+  //   "mon-semiBold": require("../assets/fonts/Montserrat-SemiBold.ttf"),
+  //   "mon-bold": require("../assets/fonts/Montserrat-Bold.ttf"),
+  // });
   const [loaded, error] = useFonts({
-    "mon-regular": require("../assets/fonts/Montserrat-Regular.ttf"),
-    "mon-semiBold": require("../assets/fonts/Montserrat-SemiBold.ttf"),
-    "mon-bold": require("../assets/fonts/Montserrat-Bold.ttf"),
+    mon: require('../assets/fonts/Montserrat-Regular.ttf'),
+    'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
+    'mon-b': require('../assets/fonts/Montserrat-Bold.ttf'),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -53,9 +58,22 @@ function RootLayoutNav() {
         options={{
           title: "Log in or Sign up",
           headerTitleStyle: {
-            fontFamily: "mon-semiBold",
+            fontFamily: "mon-sb",
           },
           presentation: "modal",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.back()}>
+              <Ionicons name="close-outline" size={28} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen name="listing/[id]" options={{ headerTitle: "" }} />
+      <Stack.Screen
+        name="(modals)/where-to"
+        options={{
+          presentation: "transparentModal",
+          animation: "fade",
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
               <Ionicons name="close-outline" size={28} />
