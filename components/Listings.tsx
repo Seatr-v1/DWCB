@@ -14,7 +14,7 @@ const Listings = ({ listings, catagory }: Props) => {
 
   return (
     <View style={defaultStyles.container}>
-      <FlatList />
+      
     </View>
   );
 };
