@@ -1,5 +1,6 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React, { useEffect } from "react";
+import { defaultStyles } from "@/constants/Style";
 
 interface Props {
   listings: any[];
@@ -8,12 +9,12 @@ interface Props {
 
 const Listings = ({ listings, catagory }: Props) => {
   useEffect(() => {
-    console.log("RELOAD");
+    console.log("RELOAD", listings.length);
   }, [catagory]);
 
   return (
-    <View>
-      <Text>Listings</Text>
+    <View style={defaultStyles.container}>
+      <FlatList />
     </View>
   );
 };

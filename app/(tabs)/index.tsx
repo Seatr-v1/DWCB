@@ -1,27 +1,25 @@
 import { View } from "react-native";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Stack } from "expo-router";
 import ExploreHeader from "@/components/ExploreHeader";
 import Listings from "@/components/Listings";
+import ListingData from "@/constants/data/fake-listings.json";
 
 const Page = () => {
   const [catagory, setCatagory] = useState("Trending");
+  const items = useMemo(() => ListingData as any, [])
   const onDataChanged = (catagory: string) => {
-    console.log("CHANGEd", catagory);
     setCatagory(catagory);
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, marginTop: 130 }}>
       <Stack.Screen
         options={{
           header: () => <ExploreHeader onCatagoryChanged={onDataChanged} />,
         }}
       />
-      <Listings listings={[]} catagory={catagory} />
-      {/* <Link href={"/(modals)/login"}>Login</Link>
-      <Link href={"/(modals)/where-to"}>Where To?</Link>
-      <Link href={"/listing/1334"}>Listing</Link> */}
+      <Listings listings={items} catagory={catagory} />
     </View>
   );
 };

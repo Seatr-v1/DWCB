@@ -10,7 +10,7 @@ import { useRef, useState } from "react";
 import Colors from "@/constants/Colors";
 import { Link } from "expo-router";
 import React from "react";
-import cuisineCategories from "@/constants/data";
+import cuisineCategories from "@/constants/data/data";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
