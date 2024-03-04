@@ -12,7 +12,7 @@
 - Install dependencies.
 
 ```bash
-npm install
+npx expo install
 ```
 
 - To run the dev build to launch expo and its simulator.
