@@ -15,7 +15,7 @@
 npm install
 ```
 
-- To run the production build
+- To run the dev build
 
 ```bash
 npx expo
