@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   Share,
 } from "react-native";
-import React from "react";
-import { useLocalSearchParams } from "expo-router";
+import React, { useLayoutEffect } from "react";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import listingData from "@/constants/data/fake-listings.json";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -28,16 +28,92 @@ const { width } = Dimensions.get("window");
 
 const Listing = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const scrollRef = useAnimatedRef<Animated.ScrollView>();
+  const scrollOffset = useScrollViewOffset(scrollRef);
+  const navigation = useNavigation();
+
+  const shareListing = async () => {
+    try {
+      await Share.share({
+        title: listing.name,
+        url: listing.listing_url,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "",
+      headerTransparent: true,
+
+      headerBackground: () => (
+        <Animated.View
+          style={[headerAnimatedStyle, styles.header]}
+        ></Animated.View>
+      ),
+      headerRight: () => (
+        <View style={styles.bar}>
+          <TouchableOpacity style={styles.roundButton} onPress={shareListing}>
+            <Ionicons name="share-outline" size={22} color={"#000"} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.roundButton}>
+            <Ionicons name="heart-outline" size={22} color={"#000"} />
+          </TouchableOpacity>
+        </View>
+      ),
+      headerLeft: () => (
+        <TouchableOpacity
+          style={styles.roundButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="chevron-back" size={24} color={"#000"} />
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
+
+  const imageAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: interpolate(
+            scrollOffset.value,
+            [-IMG_HEIGHT, 0, IMG_HEIGHT],
+            [-IMG_HEIGHT / 2, 0, IMG_HEIGHT * 0.75]
+          ),
+        },
+        {
+          scale: interpolate(
+            scrollOffset.value,
+            [-IMG_HEIGHT, 0, IMG_HEIGHT],
+            [2, 1, 1]
+          ),
+        },
+      ],
+    };
+  });
 
   //temp before backend is set up
   const listing = (listingData as any[]).find((item) => item.id === id);
 
+  const headerAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(scrollOffset.value, [0, IMG_HEIGHT / 1.5], [0, 1]),
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Animated.ScrollView>
+      <Animated.ScrollView
+        ref={scrollRef}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        scrollEventThrottle={16}
+      >
         <Animated.Image
           source={require("../../assets/images/boston-chops-img.png")}
-          style={styles.image}
+          style={[styles.image, imageAnimatedStyle]}
         />
 
         <View style={styles.infoContainer}>
@@ -72,6 +148,22 @@ const Listing = () => {
             </Text>
           </View>
 
+          <View style={styles.divider} />
+
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            <Text style={styles.secondaryText}>What this place offers</Text>
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            <Text style={styles.summary}>{listing.summary}</Text>
+          </View>
+          <View style={styles.divider} />
+
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            <Text style={styles.secondaryText}>What this place offers</Text>
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            <Text style={styles.summary}>{listing.summary}</Text>
+          </View>
           <View style={styles.divider} />
 
           <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
@@ -202,12 +294,11 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   header: {
-    backgroundColor: "#fff",
-    height: 100,
+    backgroundColor: Colors.white,
+    height: 700,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: Colors.darkGray,
   },
-
   description: {
     fontSize: 16,
     marginTop: 10,
