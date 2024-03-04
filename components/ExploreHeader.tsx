@@ -8,30 +8,29 @@ import {
 } from "react-native";
 import { useRef, useState } from "react";
 import Colors from "@/constants/Colors";
-import { Link } from "expo-router";
-import React from "react";
-import cuisineCategories from "@/constants/data/data";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
+import { Link } from "expo-router";
+import cuisineCategories from "@/constants/data/data";
 
 interface Props {
-  onCatagoryChanged: (catagory: string) => void;
+  onCategoryChanged: (category: string) => void;
 }
 
-const ExploreHeader = ({ onCatagoryChanged }: Props) => {
+const ExploreHeader = ({ onCategoryChanged }: Props) => {
   const scrollRef = useRef<ScrollView>(null);
-  const catagoriesRef = useRef<Array<TouchableOpacity | null>>([]);
+  const itemsRef = useRef<Array<TouchableOpacity | null>>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const selectCategory = (index: number) => {
-    const selected = catagoriesRef.current[index];
+    const selected = itemsRef.current[index];
     setActiveIndex(index);
     selected?.measure((x) => {
       scrollRef.current?.scrollTo({ x: x - 16, y: 0, animated: true });
     });
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    onCatagoryChanged(cuisineCategories[index].name);
+    onCategoryChanged(cuisineCategories[index].name);
   };
 
   return (
@@ -39,58 +38,57 @@ const ExploreHeader = ({ onCatagoryChanged }: Props) => {
       <View style={styles.container}>
         <View style={styles.actionRow}>
           <Link href={"/(modals)/where-to"} asChild>
-            <TouchableOpacity style={styles.searchBtn}>
-              <Ionicons name="search" size={24} />
-              <View>
-                <Text style={{ fontFamily: "mon-sb" }}>Where to?</Text>
-                <Text style={{ color: Colors.darkGray, fontFamily: "mon" }}>
-                  Any cuisine · Any time
-                </Text>
+            <TouchableOpacity>
+              <View style={styles.searchBtn}>
+                <Ionicons name="search" size={24} />
+                <View>
+                  <Text style={{ fontFamily: "mon-sb" }}>Where to?</Text>
+                  <Text style={{ color: Colors.darkGray, fontFamily: "mon" }}>
+                    Anywhere · Any week
+                  </Text>
+                </View>
               </View>
             </TouchableOpacity>
           </Link>
           <TouchableOpacity style={styles.filterBtn}>
-            <Text>
-              <Ionicons name="options-outline" size={24} />
-            </Text>
+            <Ionicons name="options-outline" size={24} />
           </TouchableOpacity>
         </View>
 
         <ScrollView
-          ref={scrollRef}
           horizontal
+          ref={scrollRef}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             alignItems: "center",
-            gap: 25,
+            gap: 20,
             paddingHorizontal: 16,
           }}
         >
-          {cuisineCategories.map((cata, i) => (
+          {cuisineCategories.map((item, index) => (
             <TouchableOpacity
-              onPress={() => selectCategory(i)}
-              key={i}
-              ref={(el) => (catagoriesRef.current[i] = el)}
+              ref={(el) => (itemsRef.current[index] = el)}
+              key={index}
               style={
-                activeIndex === i
+                activeIndex === index
                   ? styles.categoriesBtnActive
                   : styles.categoriesBtn
               }
+              onPress={() => selectCategory(index)}
             >
               <MaterialIcons
+                name={item.icon as any}
                 size={24}
-                name={cata.icon as any}
-                color={activeIndex === i ? Colors.primary : Colors.darkGray}
+                color={activeIndex === index ? Colors.primary : Colors.black}
               />
               <Text
                 style={
-                  activeIndex === i
-                    ? styles.categoriesTextActive
-                    : styles.categoriesText
+                  activeIndex === index
+                    ? styles.categoryTextActive
+                    : styles.categoryText
                 }
               >
-                {" "}
-                {cata.name}
+                {item.name}
               </Text>
             </TouchableOpacity>
           ))}
@@ -104,14 +102,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     height: 130,
-    elevation: 2,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    shadowOffset: {
-      width: 1,
-      height: 10,
-    },
+    borderBottomColor: "#000",
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   actionRow: {
     flexDirection: "row",
@@ -120,7 +112,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingBottom: 16,
   },
-
   searchBtn: {
     backgroundColor: "#fff",
     flexDirection: "row",
@@ -146,12 +137,12 @@ const styles = StyleSheet.create({
     borderColor: "#A2A0A2",
     borderRadius: 24,
   },
-  categoriesText: {
+  categoryText: {
     fontSize: 14,
     fontFamily: "mon-sb",
     color: Colors.darkGray,
   },
-  categoriesTextActive: {
+  categoryTextActive: {
     fontSize: 14,
     fontFamily: "mon-sb",
     color: Colors.primary,

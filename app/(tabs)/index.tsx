@@ -16,10 +16,10 @@ const Page = () => {
     <View style={{ flex: 1, marginTop: 130 }}>
       <Stack.Screen
         options={{
-          header: () => <ExploreHeader onCatagoryChanged={onDataChanged} />,
+          header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
-      <Listings listings={items} catagory={catagory} />
+      <Listings listings={items} category={catagory} />
     </View>
   );
 };
