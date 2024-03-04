@@ -15,12 +15,12 @@
 npm install
 ```
 
-- To run the dev build
+- To run the dev build to launch expo and its simulator.
 
 ```bash
 npx expo
 ```
-- Once expo has bunlded press "i" to ope  iOS simulator. Feel free the scan the QR code and dowload the Expo Go app to use the rendering on your phone.
+- Once expo has bunlded press "i" to open  iOS simulator. Feel free the scan the QR code and dowload the Expo Go app to use the rendering on your phone.
 
 ```bash
 i
