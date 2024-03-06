@@ -6,12 +6,14 @@ import Listings from "@/components/Listings";
 import ListingData from "@/constants/data/fake-listings.json";
 import ListingDataGeo from "@/constants/data/fake-listings.geo.json";
 import ListingMap from "@/components/ListingMap";
+import ListingsBottomSheet from "@/components/ListingsBottomSheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Page = () => {
-  const [catagory, setCatagory] = useState("Trending");
+  const [category, setCatagory] = useState("Trending");
   const items = useMemo(() => ListingData as any, []);
-  const onDataChanged = (catagory: string) => {
-    setCatagory(catagory);
+  const onDataChanged = (category: string) => {
+    setCatagory(category);
   };
 
   return (
@@ -21,8 +23,10 @@ const Page = () => {
           header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
-      {/* <Listings listings={items} category={catagory} /> */}
-      <ListingMap listings={ListingDataGeo}/>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ListingMap listings={ListingDataGeo} />
+        <ListingsBottomSheet listings={items} category={category} />
+      </GestureHandlerRootView>
     </View>
   );
 };

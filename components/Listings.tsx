@@ -18,6 +18,7 @@ import * as Haptics from "expo-haptics";
 interface Props {
   listings: any[];
   category: string;
+  refresh: number;
 }
 
 const Listings = ({ listings, category }: Props) => {
