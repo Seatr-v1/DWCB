@@ -13,6 +13,7 @@ import { Link } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
+import * as Haptics from "expo-haptics";
 
 interface Props {
   listings: any[];
@@ -34,7 +35,9 @@ const Listings = ({ listings, category }: Props) => {
 
   const renderRow: ListRenderItem<any> = ({ item }) => (
     <Link href={`/listing/${item.id}`} asChild>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)}
+      >
         <Animated.View
           style={styles.listing}
           entering={FadeInRight}
