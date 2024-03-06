@@ -15,6 +15,12 @@
 npx expo install
 ```
 
+- Make sure to install any expo packages with expo
+
+```bash
+npx expo install <package>
+```
+
 - To run the dev build to launch expo and its simulator.
 
 ```bash
@@ -31,7 +37,6 @@ i
 ```bash
 npx expo start -c
 ```
-
 
 - To run tests
 
