@@ -188,7 +188,7 @@ const Listing = () => {
           }}
         >
           <View style={styles.footerText}>
-            <Text style={styles.footerPrice}>$ {listing.price}</Text>
+            <Text style={styles.footerPrice}>${listing.price}</Text>
             <Text>+$100 Dining credit</Text>
           </View>
           <TouchableOpacity

@@ -1,24 +1,65 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import { useWarmUpBrowser } from "@/hooks/useWarmUpBrowser";
 import Colors from "@/constants/Colors";
-import { TextInput } from "react-native-gesture-handler";
-import { defaultStyles } from "@/constants/Style";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { TouchableOpacity } from "@gorhom/bottom-sheet";
+import { useOAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
-import { Fontisto } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
-const Login = () => {
+// https://github.com/clerkinc/clerk-expo-starter/blob/main/components/OAuth.tsx
+import { useWarmUpBrowser } from "@/hooks/useWarmUpBrowser";
+import { defaultStyles } from "@/constants/Style";
+
+enum Strategy {
+  Google = "oauth_google",
+  Apple = "oauth_apple",
+  Facebook = "oauth_facebook",
+}
+const Page = () => {
   useWarmUpBrowser();
 
+  const router = useRouter();
+  const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" });
+  const { startOAuthFlow: appleAuth } = useOAuth({ strategy: "oauth_apple" });
+  const { startOAuthFlow: facebookAuth } = useOAuth({
+    strategy: "oauth_facebook",
+  });
+
+  const onSelectAuth = async (strategy: Strategy) => {
+    const selectedAuth = {
+      [Strategy.Google]: googleAuth,
+      [Strategy.Apple]: appleAuth,
+      [Strategy.Facebook]: facebookAuth,
+    }[strategy];
+
+    try {
+      const { createdSessionId, setActive } = await selectedAuth();
+
+      console.log("BEFORE ID:", createdSessionId);
+
+      if (createdSessionId) {
+        console.log("AFTER ID:", createdSessionId);
+
+        setActive!({ session: createdSessionId });
+        router.back();
+      }
+    } catch (err) {
+      console.error("OAuth error", err);
+    }
+  };
+
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <View style={styles.container}>
       <TextInput
         autoCapitalize="none"
-        placeholder="Phone number"
+        placeholder="Email"
         style={[defaultStyles.inputField, { marginBottom: 30 }]}
       />
+
       <TouchableOpacity style={defaultStyles.btn}>
         <Text style={defaultStyles.btnText}>Continue</Text>
       </TouchableOpacity>
@@ -27,7 +68,7 @@ const Login = () => {
         <View
           style={{
             flex: 1,
-            borderBlockColor: Colors.black,
+            borderBottomColor: "black",
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
@@ -35,7 +76,7 @@ const Login = () => {
         <View
           style={{
             flex: 1,
-            borderBlockColor: Colors.black,
+            borderBottomColor: "black",
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
@@ -43,38 +84,51 @@ const Login = () => {
 
       <View style={{ gap: 20 }}>
         <TouchableOpacity style={styles.btnOutline}>
-          <Fontisto name="email" size={24} style={defaultStyles.btnIcon} />
-          <Text style={styles.btnOutlineText}>Countinue with Email</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOutline}>
           <Ionicons
-            name="logo-facebook"
+            name="mail-outline"
             size={24}
             style={defaultStyles.btnIcon}
           />
-          <Text style={styles.btnOutlineText}>Countinue with Email</Text>
+          <Text style={styles.btnOutlineText}>Continue with Phone</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnOutline}>
+        <TouchableOpacity
+          style={styles.btnOutline}
+          onPress={() => onSelectAuth(Strategy.Apple)}
+        >
+          <Ionicons name="logo-apple" size={24} style={defaultStyles.btnIcon} />
+          <Text style={styles.btnOutlineText}>Continue with Apple</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.btnOutline}
+          onPress={() => onSelectAuth(Strategy.Google)}
+        >
           <Ionicons
             name="logo-google"
             size={24}
             style={defaultStyles.btnIcon}
           />
-          <Text style={styles.btnOutlineText}>Countinue with Email</Text>
+          <Text style={styles.btnOutlineText}>Continue with Google</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnOutline}>
-          <Ionicons name="logo-apple" size={24} style={defaultStyles.btnIcon} />
-          <Text style={styles.btnOutlineText}>Countinue with Email</Text>
+        <TouchableOpacity
+          style={styles.btnOutline}
+          onPress={() => onSelectAuth(Strategy.Facebook)}
+        >
+          <Ionicons
+            name="logo-facebook"
+            size={24}
+            style={defaultStyles.btnIcon}
+          />
+          <Text style={styles.btnOutlineText}>Continue with Facebook</Text>
         </TouchableOpacity>
       </View>
-    </GestureHandlerRootView>
+    </View>
   );
 };
 
-export default Login;
+export default Page;
 
 const styles = StyleSheet.create({
   container: {
@@ -82,6 +136,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 26,
   },
+
   seperatorView: {
     flexDirection: "row",
     gap: 10,

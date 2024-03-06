@@ -14,7 +14,10 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
-import { BottomSheetFlatList, BottomSheetFlatListMethods } from "@gorhom/bottom-sheet";
+import {
+  BottomSheetFlatList,
+  BottomSheetFlatListMethods,
+} from "@gorhom/bottom-sheet";
 
 interface Props {
   listings: any[];
@@ -114,7 +117,9 @@ const Listings = ({ listings, category, refresh }: Props) => {
         renderItem={renderRow}
         ref={listRef}
         data={isLoading ? [] : listings}
-        ListHeaderComponent={<Text style={styles.info}>{listings.length} Reservations</Text>}
+        ListHeaderComponent={
+          <Text style={styles.info}>{listings.length} Reservations</Text>
+        }
       />
     </View>
   );
