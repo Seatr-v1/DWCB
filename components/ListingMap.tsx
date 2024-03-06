@@ -7,6 +7,7 @@ import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import * as Location from "expo-location";
 
 interface Props {
   listings: any;
@@ -26,6 +27,29 @@ const ListingsMap = memo(({ listings }: Props) => {
   // When a marker is selected, navigate to the listing page
   const onMarkerSelected = (event: any) => {
     router.push(`/listing/${event.properties.id}`);
+  };
+
+  const locateUser = async () => {
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") {
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+
+      const region = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 7,
+        longitudeDelta: 7,
+      };
+
+      mapRef.current?.animateToRegion(region);
+    } catch (error) {
+      console.log(`Error getting users location: ${error}`);
+    }
   };
 
   // Overwrite the renderCluster function to customize the cluster markers
@@ -85,7 +109,9 @@ const ListingsMap = memo(({ listings }: Props) => {
           </Marker>
         ))}
       </MapView>
-      <TouchableOpacity style={styles.locateBtn}>
+
+      {/* Locate User Button */}
+      <TouchableOpacity style={styles.locateBtn} onPress={locateUser}>
         <Ionicons name="navigate" size={24} color={Colors.darkGray} />
       </TouchableOpacity>
     </GestureHandlerRootView>

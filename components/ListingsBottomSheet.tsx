@@ -31,7 +31,9 @@ const ListingsBottomSheet = ({ listings, category }: Props) => {
       style={styles.sheetContainer}
     >
       <View style={styles.contentContainer}>
+        {/*REST LISTINGS*/}
         <Listings listings={listings} refresh={refresh} category={category} />
+        {/*REST LISTINGS*/}
         <View style={styles.absoluteView}>
           <TouchableOpacity onPress={onShowMap} style={styles.btn}>
             <Text style={{ fontFamily: "mon-sb", color: Colors.white }}>

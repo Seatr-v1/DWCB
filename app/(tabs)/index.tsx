@@ -17,13 +17,13 @@ const Page = () => {
   };
 
   return (
-    <View style={{ flex: 1, marginTop: 130 }}>
+    <View style={{ flex: 1, marginTop: 80 }}>
       <Stack.Screen
         options={{
           header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={{ flex: 1, borderRadius: 30 }}>
         <ListingMap listings={ListingDataGeo} />
         <ListingsBottomSheet listings={items} category={category} />
       </GestureHandlerRootView>

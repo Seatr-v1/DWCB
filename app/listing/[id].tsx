@@ -97,6 +97,7 @@ const Listing = () => {
 
   //temp before backend is set up
   const listing = (listingData as any[]).find((item) => item.id === id);
+  const listingImage = listing.image;
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -191,7 +192,10 @@ const Listing = () => {
             <Text>+$100 Dining credit</Text>
           </View>
           <TouchableOpacity
-            style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20 }]}
+            style={[
+              defaultStyles.btn,
+              { paddingRight: 20, paddingLeft: 20, width: 175 },
+            ]}
           >
             <Text style={defaultStyles.btnText}>Reserve</Text>
           </TouchableOpacity>

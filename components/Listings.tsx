@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
+import { BottomSheetFlatList, BottomSheetFlatListMethods } from "@gorhom/bottom-sheet";
 
 interface Props {
   listings: any[];
@@ -21,9 +22,16 @@ interface Props {
   refresh: number;
 }
 
-const Listings = ({ listings, category }: Props) => {
+const Listings = ({ listings, category, refresh }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const listRef = useRef<FlatList>(null);
+  const listRef = useRef<BottomSheetFlatListMethods>(null);
+
+  //this may now be proper behavior but it fixes an issue for now
+  useEffect(() => {
+    if (refresh) {
+      listRef.current?.scrollToOffset({ offset: 0, animated: true });
+    }
+  }, [refresh]);
 
   // Use for "updating" the views data after category changed
   useEffect(() => {
@@ -102,10 +110,11 @@ const Listings = ({ listings, category }: Props) => {
 
   return (
     <View style={defaultStyles.container}>
-      <FlatList
+      <BottomSheetFlatList
         renderItem={renderRow}
         ref={listRef}
         data={isLoading ? [] : listings}
+        ListHeaderComponent={<Text style={styles.info}>{listings.length} Reservations</Text>}
       />
     </View>
   );
