@@ -42,10 +42,12 @@ const Page = () => {
       console.log("BEFORE ID:", createdSessionId);
 
       if (createdSessionId) {
-        console.log("AFTER ID:", createdSessionId);
-
         setActive!({ session: createdSessionId });
+
+        console.log("AFTER ID", createdSessionId);
         router.back();
+      } else {
+        console.log("SESSION ID MUST BE EMPTY");
       }
     } catch (err) {
       console.error("OAuth error", err);

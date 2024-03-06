@@ -5,8 +5,8 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import * as SecureStore from "expo-secure-store";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
-
 import { TouchableOpacity } from "react-native";
+import Constants from "expo-constants";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 // Cache the Clerk JWT
@@ -39,6 +39,8 @@ export default function RootLayout() {
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
+    console.log(CLERK_PUBLISHABLE_KEY);
+
     if (error) throw error;
   }, [error]);
 
