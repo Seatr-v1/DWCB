@@ -145,7 +145,7 @@ const Profile = () => {
                     marginBottom: 8,
                   }}
                 >
-                  Sell reservations
+                  Sell your reservations
                 </Text>
                 <Text style={{ color: Colors.darkGray }}>
                   List your reservations and {"\n"}start earning.
