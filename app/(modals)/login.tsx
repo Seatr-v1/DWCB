@@ -39,15 +39,9 @@ const Page = () => {
     try {
       const { createdSessionId, setActive } = await selectedAuth();
 
-      console.log("BEFORE ID:", createdSessionId);
-
       if (createdSessionId) {
         setActive!({ session: createdSessionId });
-
-        console.log("AFTER ID", createdSessionId);
         router.back();
-      } else {
-        console.log("SESSION ID MUST BE EMPTY");
       }
     } catch (err) {
       console.error("OAuth error", err);

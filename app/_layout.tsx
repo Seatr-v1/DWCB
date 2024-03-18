@@ -39,8 +39,6 @@ export default function RootLayout() {
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
-    console.log(CLERK_PUBLISHABLE_KEY);
-
     if (error) throw error;
   }, [error]);
 
