@@ -259,7 +259,8 @@ const styles = StyleSheet.create({
     width: 100,
   },
   btnOutline: {
-    margin: 24,
+    marginLeft: 24,
+    width: "40%",
     backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: Colors.darkGray,
