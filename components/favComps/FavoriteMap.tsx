@@ -9,130 +9,136 @@ import {
   ListRenderItem,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from "react-native";
 import { Link } from "expo-router";
 import * as Haptics from "expo-haptics";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 interface Props {
   listings: any[];
+  liked: boolean;
 }
 
 const FavoriteMap = ({ listings }: Props) => {
   const Favorite: ListRenderItem<any> = ({ item }) => {
     return (
-      <View style={styles.align}>
-        <Link style={styles.listing} href={`/listing/${item.id}`}>
-          <TouchableOpacity
-            onPress={() =>
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-            }
-          >
-            <Animated.View
-              style={styles.listing}
-              entering={FadeInRight}
-              exiting={FadeOutLeft}
+      <SafeAreaView>
+        <View style={styles.align}>
+          <Link href={`/listing/${item.id}`}>
+            <TouchableOpacity
+              onPress={() =>
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+              }
             >
-              <Image
-                source={require("../../assets/images/boston-chops-img.png")}
-                style={styles.image}
-              />
-              <View style={styles.text}>
-                <Text
-                  style={{
-                    fontFamily: "mon-sb",
-                    fontSize: 20,
-                    color: "black",
-                  }}
-                >
-                  {item.name}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: "mon-sb",
-                    fontSize: 12,
-                    color: "grey",
-                    marginLeft: 1,
-                    marginTop: 5,
-                  }}
-                >
-                  {item.address}
-                </Text>
-                <View style={styles.details}>
-                  <Text
-                    style={{
-                      fontFamily: "mon-sb",
-                      fontSize: 12,
-                      marginLeft: 1,
-                      color: "grey",
-                    }}
-                  >
-                    {item.avgCost}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: "mon-sb",
-                      fontSize: 12,
-                      marginLeft: 5,
-                      color: "grey",
-                    }}
-                  >
-                    •
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: "mon-sb",
-                      fontSize: 12,
-                      marginLeft: 5,
-                      color: "grey",
-                    }}
-                  >
-                    {item.cuisine}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: "mon-sb",
-                      fontSize: 12,
-                      marginLeft: 5,
-                      color: "grey",
-                    }}
-                  >
-                    •
-                  </Text>
-                  <Ionicons
-                    style={{ marginLeft: 5, color: "grey" }}
-                    name={"star"}
-                    size={10}
+              <Animated.View
+                style={styles.listing}
+                entering={FadeInRight}
+                exiting={FadeOutLeft}
+              >
+                <View style={styles.imageBox}>
+                  <Image
+                    source={require("../../assets/images/boston-chops-img.png")}
+                    style={styles.image}
                   />
-                  <Text
-                    style={{
-                      fontFamily: "mon-sb",
-                      fontSize: 12,
-                      marginLeft: 2,
-                      color: "grey",
-                    }}
-                  >
-                    {`${item.review_score} (${item.number_of_reviews})`}
-                  </Text>
+                  <View style={styles.text}>
+                    <Text
+                      style={{
+                        fontFamily: "mon-sb",
+                        fontSize: 16,
+                        color: "black",
+                      }}
+                    >
+                      {item.name}
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: "mon-sb",
+                        fontSize: 10,
+                        color: "grey",
+                        marginLeft: 1,
+                        marginTop: 5,
+                      }}
+                    >
+                      {item.address}
+                    </Text>
+                    <View style={styles.details}>
+                      <Text
+                        style={{
+                          fontFamily: "mon-sb",
+                          fontSize: 10,
+                          marginLeft: 1,
+                          color: "grey",
+                        }}
+                      >
+                        {item.avgCost}
+                      </Text>
+                      <Text
+                        style={{
+                          fontFamily: "mon-sb",
+                          fontSize: 10,
+                          marginLeft: 5,
+                          color: "grey",
+                        }}
+                      >
+                        •
+                      </Text>
+                      <Text
+                        style={{
+                          fontFamily: "mon-sb",
+                          fontSize: 10,
+                          marginLeft: 5,
+                          color: "grey",
+                        }}
+                      >
+                        {item.cuisine}
+                      </Text>
+                      <Text
+                        style={{
+                          fontFamily: "mon-sb",
+                          fontSize: 12,
+                          marginLeft: 5,
+                          color: "grey",
+                        }}
+                      >
+                        •
+                      </Text>
+                      <Ionicons
+                        style={{ marginLeft: 5, color: "grey" }}
+                        name={"star"}
+                        size={10}
+                      />
+                      <Text
+                        style={{
+                          fontFamily: "mon-sb",
+                          fontSize: 10,
+                          marginLeft: 2,
+                          color: "grey",
+                        }}
+                      >
+                        {`${item.review_score} (${item.number_of_reviews})`}
+                      </Text>
+                    </View>
+                  </View>
                 </View>
-              </View>
-              <Ionicons
-                name="close"
-                size={20}
-                color={"grey"}
-                style={{ marginLeft: 20, marginTop: 9 }}
-              />
-            </Animated.View>
-          </TouchableOpacity>
-        </Link>
-        <Text style={styles.divider}></Text>
-      </View>
+                <Ionicons
+                  name="heart"
+                  size={18}
+                  color={"red"}
+                  style={{ position: "absolute", right: 33 }}
+                />
+              </Animated.View>
+            </TouchableOpacity>
+          </Link>
+          <Text style={styles.divider}></Text>
+        </View>
+      </SafeAreaView>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.align}>
       {listings.length > 0 ? (
         <FlatList renderItem={Favorite} data={listings} />
       ) : (
@@ -142,12 +148,12 @@ const FavoriteMap = ({ listings }: Props) => {
   );
 };
 
-// define your styles
 const styles = StyleSheet.create({
   align: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
   },
   container: {
     display: "flex",
@@ -158,25 +164,24 @@ const styles = StyleSheet.create({
   listing: {
     display: "flex",
     flexDirection: "row",
-    height: 150,
+    height: 100,
     width: Dimensions.get("window").width,
     alignItems: "center",
-    justifyContent: "space-evenly",
-    position: "relative",
-    left: -8,
+    justifyContent: "flex-start",
+    marginLeft: 10,
+    marginTop: 5,
   },
   divider: {
     height: 0.5,
     backgroundColor: "grey",
-    width: Dimensions.get("window").width - 30,
+    width: Dimensions.get("window").width - 20,
+    alignSelf: "center",
   },
   image: {
-    width: 125,
-    height: "60%",
+    width: 120,
+    height: "70%",
     borderRadius: 10,
-    marginLeft: 15,
     resizeMode: "cover",
-    // backgroundColor: "grey"
   },
   text: {
     height: "60%",
@@ -184,14 +189,21 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center",
-    // backgroundColor: "grey",
+    marginLeft: 12,
   },
   details: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent: "space-between",
+    justifyContent: "space-between",
     marginTop: 5,
+  },
+  imageBox: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
   },
 });
 
