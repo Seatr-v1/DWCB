@@ -12,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { Link } from "expo-router";
-import cuisineCategories from "@/constants/data/data";
+import { cuisineCategories } from "@/constants/data/data";
 
 interface Props {
   onCategoryChanged: (category: string) => void;
