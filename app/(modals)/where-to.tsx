@@ -20,7 +20,7 @@ import DatePicker from "react-native-modern-datepicker";
 const today = new Date().toISOString().substring(0, 10);
 const AnimatedTouchableOpacity =
   Animated.createAnimatedComponent(TouchableOpacity);
-  
+
 const guestGroups = [
   {
     name: "Adults",
@@ -44,6 +44,10 @@ const Where = () => {
   const [selectedPlace, setSelectedPlace] = useState(0);
   const [groups, setGroups] = useState(guestGroups);
 
+  const [selectedCityTitle, setSelectedCityTitle] = useState("Any city");
+  const [selectedDate, setSelectedDate] = useState("Any day");
+  const [selectedGroupSize, setSelectedGroupSize] = useState("Add");
+
   const router = useRouter();
   const handleClearAll = () => {
     setSelectedPlace(0);
@@ -64,7 +68,7 @@ const Where = () => {
               exiting={FadeOut.duration(200)}
             >
               <Text style={styles.previewText}>Where</Text>
-              <Text style={styles.previewdData}>I'm flexible</Text>
+              <Text style={styles.previewdData}>{selectedCityTitle}</Text>
             </AnimatedTouchableOpacity>
           )}
 
@@ -97,7 +101,10 @@ const Where = () => {
               >
                 {whereToPlaces.map((item, index) => (
                   <TouchableOpacity
-                    onPress={() => setSelectedPlace(index)}
+                    onPress={() => {
+                      setSelectedPlace(index);
+                      setSelectedCityTitle(item.title);
+                    }}
                     key={index}
                   >
                     <Image
@@ -135,7 +142,7 @@ const Where = () => {
               exiting={FadeOut.duration(200)}
             >
               <Text style={styles.previewText}>When</Text>
-              <Text style={styles.previewdData}>Any week</Text>
+              <Text style={styles.previewdData}>{selectedDate}</Text>
             </AnimatedTouchableOpacity>
           )}
 
@@ -170,7 +177,9 @@ const Where = () => {
               exiting={FadeOut.duration(200)}
             >
               <Text style={styles.previewText}>Who</Text>
-              <Text style={styles.previewdData}>Add guests</Text>
+              <Text style={styles.previewdData}>
+                {selectedGroupSize} guests
+              </Text>
             </AnimatedTouchableOpacity>
           )}
 
