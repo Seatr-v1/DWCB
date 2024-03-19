@@ -85,7 +85,7 @@ const Where = () => {
                     style={styles.searchIcon}
                     name="search"
                     size={20}
-                    color="#000"
+                    color={Colors.darkGray}
                   />
                   <TextInput
                     style={styles.inputField}
@@ -235,7 +235,9 @@ const Where = () => {
                         name="remove-circle-outline"
                         size={26}
                         color={
-                          groups[index].count > 0 ? Colors.darkGray : "#cdcdcd"
+                          groups[index].count > 0
+                            ? Colors.darkGray
+                            : Colors.lightGray
                         }
                       />
                     </TouchableOpacity>
