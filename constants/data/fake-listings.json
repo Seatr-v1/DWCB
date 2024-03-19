@@ -11,7 +11,9 @@
     "price": "350",
     "reservation_date": "Sat, 2/24",
     "table_size": "2-top",
-    "address": "52 Temple Pl, Boston, MA 02111"
+    "address": "52 Temple Pl, Boston, MA 02111",
+    "avgCost": "$$$",
+    "cuisine": "Steakhouse"
   },
   {
     "id": "2",
@@ -24,20 +26,26 @@
     "number_of_reviews": "1028",
     "reservation_cost": "225",
     "reservation_date": "Sat, 2/24",
-    "table_size": "4-top"
+    "table_size": "4-top",
+    "avgCost": "$$",
+    "cuisine": "French",
+    "address": "52 Temple Pl, Boston, MA 02111"
   },
   {
     "id": "3",
-    "name": "Boston Chops",
+    "name": "Boston Chops 2",
     "image": "boston-chops-img.png",
     "summary": "Boston Chops Downtown is a casual, yet refined twist on the classic American steakhouse. Impeccable service and top quality nose-to-tail dining combine in a modern, urban atmosphere.",
     "city": "Boston",
     "state": "MA",
-    "review_score": "4.97",
-    "number_of_reviews": "983",
+    "review_score": "4.91",
+    "number_of_reviews": "923",
     "reservation_cost": "350",
     "reservation_date": "Sat, 2/24",
-    "table_size": "2-top"
+    "table_size": "2-top",
+    "avgCost": "$$$",
+    "cuisine": "Steakhouse",
+    "address": "52 Temple Pl, Boston, MA 02111"
   },
   {
     "id": "4",

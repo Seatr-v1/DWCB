@@ -14,10 +14,12 @@ import { defaultStyles } from "@/constants/Style";
 import { Link } from "expo-router";
 import * as Haptics from "expo-haptics";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
+import { Ionicons } from "@expo/vector-icons";
 
 interface Props {
   listings: any[];
 }
+
 const FavoriteMap = ({ listings }: Props) => {
   const Favorite: ListRenderItem<any> = ({ item }) => {
     return (
@@ -42,22 +44,86 @@ const FavoriteMap = ({ listings }: Props) => {
                   style={{
                     fontFamily: "mon-sb",
                     fontSize: 20,
+                    color: "black",
                   }}
                 >
                   {item.name}
                 </Text>
                 <Text
                   style={{
-                    fontFamily: "mon-light",
-                    fontSize: 11,
+                    fontFamily: "mon-sb",
+                    fontSize: 12,
                     color: "grey",
                     marginLeft: 1,
-                    marginTop: 3,
+                    marginTop: 5,
                   }}
                 >
                   {item.address}
                 </Text>
+                <View style={styles.details}>
+                  <Text
+                    style={{
+                      fontFamily: "mon-sb",
+                      fontSize: 12,
+                      marginLeft: 1,
+                      color: "grey",
+                    }}
+                  >
+                    {item.avgCost}
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "mon-sb",
+                      fontSize: 12,
+                      marginLeft: 5,
+                      color: "grey",
+                    }}
+                  >
+                    •
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "mon-sb",
+                      fontSize: 12,
+                      marginLeft: 5,
+                      color: "grey",
+                    }}
+                  >
+                    {item.cuisine}
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "mon-sb",
+                      fontSize: 12,
+                      marginLeft: 5,
+                      color: "grey",
+                    }}
+                  >
+                    •
+                  </Text>
+                  <Ionicons
+                    style={{ marginLeft: 5, color: "grey" }}
+                    name={"star"}
+                    size={10}
+                  />
+                  <Text
+                    style={{
+                      fontFamily: "mon-sb",
+                      fontSize: 12,
+                      marginLeft: 2,
+                      color: "grey",
+                    }}
+                  >
+                    {`${item.review_score} (${item.number_of_reviews})`}
+                  </Text>
+                </View>
               </View>
+              <Ionicons
+                name="close"
+                size={20}
+                color={"grey"}
+                style={{ marginLeft: 20, marginTop: 9 }}
+              />
             </Animated.View>
           </TouchableOpacity>
         </Link>
@@ -96,7 +162,9 @@ const styles = StyleSheet.create({
     height: 150,
     width: Dimensions.get("window").width,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-evenly",
+    position: "relative",
+    left: -8,
   },
   divider: {
     height: 0.5,
@@ -109,15 +177,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginLeft: 15,
     resizeMode: "cover",
+    // backgroundColor: "grey"
   },
   text: {
-    marginTop: 10,
     height: "60%",
-    marginLeft: 20,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    justifyContent: "flex-start",
+    justifyContent: "center",
+    // backgroundColor: "grey",
+  },
+  details: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    // justifyContent: "space-between",
+    marginTop: 5,
   },
 });
 
