@@ -33,5 +33,11 @@ export const cuisineCategories = [
   },
 ];
 
-export const whereToPlaces = [{ title: "Boston" }];
-
+export const whereToPlaces = [
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+];
