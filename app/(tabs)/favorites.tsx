@@ -5,16 +5,12 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import FavoriteMap from "@/components/favComps/FavoriteMap";
 import FavoriteRedirect from "@/components/favComps/FavoriteRedirect";
 import { Stack } from "expo-router";
-
-
-
-
-
+import { useAuth } from "@clerk/clerk-expo";
 
 const Favorites = () => {
   const items = useMemo(() => ListingData as any, []);
   const tempData = [items[0], items[1], items[2]];
-  const [signedIn, setSignedIn] = useState<boolean>(true)
+  const { signOut, isSignedIn } = useAuth();
 
   return (
     <View>
@@ -24,7 +20,11 @@ const Favorites = () => {
         }}
       />
       <GestureHandlerRootView>
-        {signedIn ? <FavoriteMap listings={tempData} /> : <FavoriteRedirect />}
+        {isSignedIn ? (
+          <FavoriteMap listings={tempData} />
+        ) : (
+          <FavoriteRedirect />
+        )}
       </GestureHandlerRootView>
     </View>
   );

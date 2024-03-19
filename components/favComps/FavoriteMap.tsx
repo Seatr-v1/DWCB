@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { defaultStyles } from "@/constants/Style";
 import { Link } from "expo-router";
 import * as Haptics from "expo-haptics";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
