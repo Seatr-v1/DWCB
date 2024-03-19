@@ -46,13 +46,17 @@ const Where = () => {
 
   const [selectedCityTitle, setSelectedCityTitle] = useState("Any city");
   const [selectedDate, setSelectedDate] = useState("Any day");
-  const [selectedGroupSize, setSelectedGroupSize] = useState("Add");
+  const [selectedGroupSize, setSelectedGroupSize] = useState<number>(0);
 
   const router = useRouter();
+
   const handleClearAll = () => {
     setSelectedPlace(0);
     setOpenCard(0);
     setGroups(guestGroups);
+    setSelectedCityTitle("Any city");
+    setSelectedDate("Any day");
+    setSelectedGroupSize(0);
   };
 
   return (
@@ -76,8 +80,8 @@ const Where = () => {
           {openCard == 0 && (
             <>
               <Animated.View
-                entering={FadeIn}
-                exiting={FadeOut}
+                entering={FadeIn.duration(10)}
+                exiting={FadeOut.duration(10)}
                 style={styles.cardBody}
               >
                 <View style={styles.searchSection}>
@@ -153,6 +157,9 @@ const Where = () => {
           {openCard == 1 && (
             <Animated.View style={styles.cardBody}>
               <DatePicker
+                onSelectedChange={(date: string): string | void =>
+                  setSelectedDate(date)
+                }
                 options={{
                   defaultFont: "mon",
                   headerFont: "mon-sb",
@@ -178,7 +185,7 @@ const Where = () => {
             >
               <Text style={styles.previewText}>Who</Text>
               <Text style={styles.previewdData}>
-                {selectedGroupSize} guests
+                {selectedGroupSize > 0 ? selectedGroupSize : "Add"} guests
               </Text>
             </AnimatedTouchableOpacity>
           )}
@@ -229,6 +236,10 @@ const Where = () => {
                             : 0;
 
                         setGroups(newGroups);
+
+                        setSelectedGroupSize(
+                          selectedGroupSize > 1 ? selectedGroupSize - 1 : 0
+                        );
                       }}
                     >
                       <Ionicons
@@ -256,6 +267,7 @@ const Where = () => {
                         const newGroups = [...groups];
                         newGroups[index].count++;
                         setGroups(newGroups);
+                        setSelectedGroupSize(selectedGroupSize + 1);
                       }}
                     >
                       <Ionicons
