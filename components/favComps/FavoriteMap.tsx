@@ -18,13 +18,13 @@ import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 interface Props {
   listings: any[];
-  liked: boolean;
 }
 
 const FavoriteMap = ({ listings }: Props) => {
+
   const Favorite: ListRenderItem<any> = ({ item }) => {
     return (
-      <SafeAreaView>
+      <SafeAreaView >
         <View style={styles.align}>
           <Link href={`/listing/${item.id}`}>
             <TouchableOpacity
@@ -154,12 +154,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-  },
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    backgroundColor: "white",
   },
   listing: {
     display: "flex",

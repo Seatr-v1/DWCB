@@ -10,17 +10,16 @@ import { useAuth } from "@clerk/clerk-expo";
 const Favorites = () => {
   const items = useMemo(() => ListingData as any, []);
   const tempData = [items[0], items[1], items[2]];
-  // const { signOut, isSignedIn } = useAuth();
-  const isSignedIn = true
+  const { signOut, isSignedIn } = useAuth();
 
   return (
-    <View>
+    <View style={styles.container}  >
       <Stack.Screen
         options={{
           title: "Wish List",
         }}
       />
-      <GestureHandlerRootView>
+      <GestureHandlerRootView >
         {isSignedIn ? (
           <FavoriteMap listings={tempData} />
         ) : (
@@ -30,5 +29,11 @@ const Favorites = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    flex: 1
+  },
+})
 
 export default Favorites;

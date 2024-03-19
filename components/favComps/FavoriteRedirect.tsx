@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     fontFamily: "mon-sb",
+    backgroundColor: "#fff",
   },
   btn: {
     backgroundColor: Colors.primary,
