@@ -52,6 +52,7 @@ const ListingsBottomSheet = ({ listings, category }: Props) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,

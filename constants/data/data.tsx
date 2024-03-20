@@ -1,4 +1,4 @@
-const cuisineCategories = [
+export const cuisineCategories = [
   {
     name: "Trending",
     icon: "local-fire-department",
@@ -33,4 +33,11 @@ const cuisineCategories = [
   },
 ];
 
-export default cuisineCategories;
+export const whereToPlaces = [
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+  { title: "Boston" },
+];

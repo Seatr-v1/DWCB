@@ -1,4 +1,4 @@
-import { View, Text, Button, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
@@ -145,7 +145,7 @@ const Profile = () => {
                     marginBottom: 8,
                   }}
                 >
-                  Sell reservations
+                  Sell your reservations
                 </Text>
                 <Text style={{ color: Colors.darkGray }}>
                   List your reservations and {"\n"}start earning.
