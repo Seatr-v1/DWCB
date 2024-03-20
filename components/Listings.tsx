@@ -14,7 +14,6 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
-import { FontAwesome } from '@expo/vector-icons';
 import {
   BottomSheetFlatList,
   BottomSheetFlatListMethods,

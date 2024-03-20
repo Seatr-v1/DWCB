@@ -13,6 +13,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { Link } from "expo-router";
 import { cuisineCategories } from "@/constants/data/data";
+import { useUser } from "@clerk/clerk-expo";
+import { Image } from "react-native";
 
 interface Props {
   onCategoryChanged: (category: string) => void;
@@ -22,6 +24,7 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   const scrollRef = useRef<ScrollView>(null);
   const itemsRef = useRef<Array<TouchableOpacity | null>>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { user } = useUser();
 
   const selectCategory = (index: number) => {
     const selected = itemsRef.current[index];
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 280,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "#c2c2c2",
+    borderColor: Colors.lightGray,
     borderRadius: 30,
     elevation: 2,
     shadowColor: "#000",
