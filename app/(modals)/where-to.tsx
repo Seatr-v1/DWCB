@@ -53,7 +53,7 @@ const Where = () => {
   const handleClearAll = () => {
     setSelectedPlace(0);
     setOpenCard(0);
-    setGroups(guestGroups);
+    setGroups(guestGroups.map((item) => ({ ...item, count: 0 })));
     setSelectedCityTitle("Any city");
     setSelectedDate("Any day");
     setSelectedGroupSize(0);
@@ -230,6 +230,7 @@ const Where = () => {
                     <TouchableOpacity
                       onPress={() => {
                         const newGroups = [...groups];
+
                         newGroups[index].count =
                           newGroups[index].count > 0
                             ? newGroups[index].count - 1
