@@ -54,7 +54,7 @@ const FavoriteMap = ({ listings }: Props) => {
                       style={{
                         fontFamily: "mon-sb",
                         fontSize: 18,
-                        color: "black",
+                        color: Colors.black,
                       }}
                     >
                       {item.name}
@@ -63,7 +63,7 @@ const FavoriteMap = ({ listings }: Props) => {
                       style={{
                         fontFamily: "mon-sb",
                         fontSize: 12,
-                        color: "grey",
+                        color: Colors.darkGray,
                         marginLeft: 1,
                         marginTop: 5,
                       }}
@@ -76,7 +76,7 @@ const FavoriteMap = ({ listings }: Props) => {
                           fontFamily: "mon-sb",
                           fontSize: 12,
                           marginLeft: 1,
-                          color: "grey",
+                          color: Colors.darkGray,
                         }}
                       >
                         {item.avgCost}
@@ -86,7 +86,7 @@ const FavoriteMap = ({ listings }: Props) => {
                           fontFamily: "mon-sb",
                           fontSize: 12,
                           marginLeft: 5,
-                          color: "grey",
+                          color: Colors.darkGray,
                         }}
                       >
                         •
@@ -96,7 +96,7 @@ const FavoriteMap = ({ listings }: Props) => {
                           fontFamily: "mon-sb",
                           fontSize: 12,
                           marginLeft: 5,
-                          color: "grey",
+                          color: Colors.darkGray,
                         }}
                       >
                         {item.cuisine}
@@ -106,13 +106,13 @@ const FavoriteMap = ({ listings }: Props) => {
                           fontFamily: "mon-sb",
                           fontSize: 12,
                           marginLeft: 5,
-                          color: "grey",
+                          color: Colors.darkGray,
                         }}
                       >
                         •
                       </Text>
                       <Ionicons
-                        style={{ marginLeft: 5, color: "grey" }}
+                        style={{ marginLeft: 5, color: Colors.darkGray }}
                         name={"star"}
                         size={12}
                       />
@@ -121,7 +121,7 @@ const FavoriteMap = ({ listings }: Props) => {
                           fontFamily: "mon-sb",
                           fontSize: 12,
                           marginLeft: 2,
-                          color: "grey",
+                          color: Colors.darkGray,
                         }}
                       >
                         {`${item.review_score} (${item.number_of_reviews})`}
@@ -173,7 +173,7 @@ const FavoriteMap = ({ listings }: Props) => {
                       style={{
                         fontFamily: "mon-sb",
                         fontSize: 18,
-                        color: "black",
+                        color: Colors.black,
                       }}
                     >
                       {item.name}
@@ -182,7 +182,7 @@ const FavoriteMap = ({ listings }: Props) => {
                       style={{
                         fontFamily: "mon-sb",
                         fontSize: 12,
-                        color: "grey",
+                        color: Colors.darkGray,
                         marginLeft: 1,
                         marginTop: 5,
                       }}
@@ -191,7 +191,7 @@ const FavoriteMap = ({ listings }: Props) => {
                     </Text>
                     <View style={styles.details}>
                       <AntDesign
-                        style={{ marginLeft: 1, color: "grey" }}
+                        style={{ marginLeft: 1, color: Colors.darkGray }}
                         name={"calendar"}
                         size={12}
                       />
@@ -201,14 +201,13 @@ const FavoriteMap = ({ listings }: Props) => {
                           fontFamily: "mon-sb",
                           fontSize: 12,
                           marginLeft: 2,
-                          // marginTop: 1,
-                          color: "grey",
+                          color: Colors.darkGray,
                         }}
                       >
                         {"3/27 7:00pm"}
                       </Text>
                       <AntDesign
-                        style={{ marginLeft: 8, color: "grey" }}
+                        style={{ marginLeft: 8, color: Colors.darkGray }}
                         name={"user"}
                         size={12}
                       />
@@ -218,8 +217,7 @@ const FavoriteMap = ({ listings }: Props) => {
                           fontFamily: "mon-sb",
                           fontSize: 12,
                           marginLeft: 2,
-                          // marginTop: 1,
-                          color: "grey",
+                          color: Colors.darkGray,
                         }}
                       >
                         {"2"}
@@ -250,8 +248,8 @@ const FavoriteMap = ({ listings }: Props) => {
             height: 50,
             justifyContent: "center",
             alignItems: "center",
-            borderBottomColor: reservationTab ? "black" : "grey",
-            borderBottomWidth: reservationTab ? 1 : 0.3,
+            borderBottomColor: reservationTab ? Colors.black : Colors.darkGray,
+            borderBottomWidth: reservationTab ? 2 : 0.3,
           }}
           onPress={() => setReservationTab(true)}
           activeOpacity={1}
@@ -266,8 +264,8 @@ const FavoriteMap = ({ listings }: Props) => {
             height: 50,
             justifyContent: "center",
             alignItems: "center",
-            borderBottomColor: !reservationTab ? "black" : "grey",
-            borderBottomWidth: !reservationTab ? 1 : 0.3,
+            borderBottomColor: !reservationTab ? Colors.black : Colors.darkGray,
+            borderBottomWidth: !reservationTab ? 2 : 0.3,
           }}
           onPress={() => setReservationTab(false)}
           activeOpacity={1}
@@ -292,7 +290,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
   },
   listing: {
     display: "flex",
@@ -314,7 +312,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 0.5,
-    backgroundColor: "grey",
+    backgroundColor: Colors.darkGray,
     width: Dimensions.get("window").width - 20,
     alignSelf: "center",
   },
@@ -353,11 +351,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   black: {
-    color: "black",
+    color: Colors.black,
     fontFamily: "mon-b",
   },
   grey: {
-    color: "grey",
+    color: Colors.darkGray,
     fontFamily: "mon-sb",
   },
   container: {
@@ -367,7 +365,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     fontFamily: "mon-sb",
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white,
   },
   btn2: {
     backgroundColor: Colors.primary,
