@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import { whereToPlaces } from "@/constants/data/data";
 import { TextInput } from "react-native-gesture-handler";
+import * as Haptics from "expo-haptics";
 // @ts-ignore
 import DatePicker from "react-native-modern-datepicker";
 
@@ -66,7 +67,10 @@ const Where = () => {
         <View style={styles.card}>
           {openCard != 0 && (
             <AnimatedTouchableOpacity
-              onPress={() => setOpenCard(0)}
+              onPress={() => {
+                Haptics.ImpactFeedbackStyle.Light;
+                setOpenCard(0);
+              }}
               style={styles.cardPreview}
               entering={FadeIn.duration(200)}
               exiting={FadeOut.duration(200)}
@@ -140,7 +144,10 @@ const Where = () => {
         <View style={styles.card}>
           {openCard != 1 && (
             <AnimatedTouchableOpacity
-              onPress={() => setOpenCard(1)}
+              onPress={() => {
+                Haptics.ImpactFeedbackStyle.Light;
+                setOpenCard(1);
+              }}
               style={styles.cardPreview}
               entering={FadeIn.duration(200)}
               exiting={FadeOut.duration(200)}
@@ -178,7 +185,10 @@ const Where = () => {
         <View style={styles.card}>
           {openCard != 2 && (
             <AnimatedTouchableOpacity
-              onPress={() => setOpenCard(2)}
+              onPress={() => {
+                Haptics.ImpactFeedbackStyle.Light;
+                setOpenCard(2);
+              }}
               style={styles.cardPreview}
               entering={FadeIn.duration(200)}
               exiting={FadeOut.duration(200)}
