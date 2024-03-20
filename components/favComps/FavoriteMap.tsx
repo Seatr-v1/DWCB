@@ -28,7 +28,11 @@ const FavoriteMap = ({ listings }: Props) => {
   const Favorite: ListRenderItem<any> = ({ item }) => {
     return (
       <SafeAreaView>
-        <View style={styles.align}>
+        <Animated.View
+          style={styles.align}
+          entering={FadeInRight}
+          exiting={FadeOutLeft}
+        >
           <Link href={`/listing/${item.id}`}>
             <TouchableOpacity
               onPress={() =>
@@ -135,7 +139,7 @@ const FavoriteMap = ({ listings }: Props) => {
             </TouchableOpacity>
           </Link>
           <Text style={styles.divider}></Text>
-        </View>
+        </Animated.View>
       </SafeAreaView>
     );
   };
@@ -143,7 +147,11 @@ const FavoriteMap = ({ listings }: Props) => {
   const Reservations: ListRenderItem<any> = ({ item }) => {
     return (
       <SafeAreaView>
-        <View style={styles.align}>
+        <Animated.View
+          style={styles.align}
+          entering={FadeInRight}
+          exiting={FadeOutLeft}
+        >
           <Link href={`/listing/${item.id}`}>
             <TouchableOpacity
               onPress={() =>
@@ -228,7 +236,7 @@ const FavoriteMap = ({ listings }: Props) => {
             </TouchableOpacity>
           </Link>
           <Text style={styles.divider}></Text>
-        </View>
+        </Animated.View>
       </SafeAreaView>
     );
   };
@@ -346,9 +354,11 @@ const styles = StyleSheet.create({
   },
   black: {
     color: "black",
+    fontFamily: "mon-b",
   },
   grey: {
     color: "grey",
+    fontFamily: "mon-sb",
   },
   container: {
     display: "flex",
