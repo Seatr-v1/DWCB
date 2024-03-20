@@ -10,13 +10,14 @@ import { useAuth } from "@clerk/clerk-expo";
 const Favorites = () => {
   const items = useMemo(() => ListingData as any, []);
   const tempData = [items[0], items[1], items[2]];
-  const { signOut, isSignedIn } = useAuth();
+  // const { signOut, isSignedIn } = useAuth();
+  const isSignedIn = true
 
   return (
     <View style={styles.container}  >
       <Stack.Screen
         options={{
-          title: "Wish List",
+          title: "",
         }}
       />
       <GestureHandlerRootView >
