@@ -33,6 +33,8 @@ const Listing = () => {
   const navigation = useNavigation();
 
   const shareListing = async () => {
+
+    console.log("share");
     try {
       await Share.share({
         title: listing.name,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "expo-router";
+import { Tabs, Stack } from "expo-router";
 import Colors from "@/constants/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -27,7 +27,7 @@ const Layout = () => {
       <Tabs.Screen
         name="favorites"
         options={{
-          tabBarLabel: "Favorites",
+          tabBarLabel: "Wish List",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart-outline" color={color} size={size} />
           ),
