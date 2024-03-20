@@ -53,7 +53,6 @@ const Where = () => {
 
   const handleClearAll = () => {
     setSelectedPlace(0);
-    setOpenCard(0);
     setGroups(guestGroups.map((item) => ({ ...item, count: 0 })));
     setSelectedCityTitle("Any city");
     setSelectedDate("Any day");

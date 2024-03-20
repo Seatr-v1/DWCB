@@ -82,6 +82,19 @@ const Profile = () => {
           )}
         </View>
 
+        <View style={{ flex: 1 }}>
+          <Text
+            style={{
+              fontFamily: "mon-sb",
+              fontSize: 18,
+              marginBottom: 8,
+              color: Colors.darkGray,
+            }}
+          >
+            Log in to start buying and selling.
+          </Text>
+        </View>
+
         {user && (
           <View style={styles.profile}>
             <TouchableOpacity onPress={onCaptureImage}>
@@ -119,22 +132,31 @@ const Profile = () => {
             <View style={styles.divider} />
           </View>
         )}
+
         <View>
-          <Text
-            style={{
-              fontFamily: "mon-sb",
-              fontSize: 28,
-              marginLeft: 24,
-              marginBottom: 8,
-            }}
-          >
-            About
-          </Text>
-          <Text
-            style={{ color: Colors.darkGray, marginLeft: 24, marginBottom: 24 }}
-          >
-            {email}
-          </Text>
+          {user && (
+            <>
+              <Text
+                style={{
+                  fontFamily: "mon-sb",
+                  fontSize: 28,
+                  marginLeft: 24,
+                  marginBottom: 8,
+                }}
+              >
+                About
+              </Text>
+              <Text
+                style={{
+                  color: Colors.darkGray,
+                  marginLeft: 24,
+                  marginBottom: 24,
+                }}
+              >
+                {email}
+              </Text>
+            </>
+          )}
           <View style={styles.card}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View style={{ flex: 1 }}>
@@ -159,9 +181,11 @@ const Profile = () => {
           </View>
         </View>
 
-        <View style={{ padding: 24 }}>
-          <View style={styles.divider} />
-        </View>
+        {user && (
+          <View style={{ padding: 24 }}>
+            <View style={styles.divider} />
+          </View>
+        )}
 
         {isSignedIn && (
           <TouchableOpacity style={styles.btnOutline} onPress={() => signOut()}>
@@ -227,14 +251,14 @@ const styles = StyleSheet.create({
   editRow: {
     flex: 1,
     flexDirection: "row",
-    gap: 8,
+    gap: 5,
   },
   editText: {
     fontSize: 18,
     paddingTop: 8,
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
-    textDecorationColor: "#000",
+    textDecorationColor: Colors.black,
   },
   divider: {
     height: StyleSheet.hairlineWidth,
@@ -261,7 +285,7 @@ const styles = StyleSheet.create({
   btnOutline: {
     marginLeft: 24,
     width: "40%",
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white,
     borderWidth: 1,
     borderColor: Colors.darkGray,
     height: 50,
@@ -272,7 +296,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   btnOutlineText: {
-    color: "#000",
+    color: Colors.black,
     fontSize: 16,
   },
 });
