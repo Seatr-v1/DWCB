@@ -19,6 +19,7 @@ enum Strategy {
   Apple = "oauth_apple",
   Facebook = "oauth_facebook",
 }
+
 const Page = () => {
   useWarmUpBrowser();
 

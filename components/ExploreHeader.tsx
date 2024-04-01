@@ -13,8 +13,6 @@ import { MaterialIcons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { Link } from "expo-router";
 import { cuisineCategories } from "@/constants/data/data";
-import { useUser } from "@clerk/clerk-expo";
-import { Image } from "react-native";
 
 interface Props {
   onCategoryChanged: (category: string) => void;
@@ -24,7 +22,6 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
   const scrollRef = useRef<ScrollView>(null);
   const itemsRef = useRef<Array<TouchableOpacity | null>>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const { user } = useUser();
 
   const selectCategory = (index: number) => {
     const selected = itemsRef.current[index];
@@ -40,6 +37,7 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={styles.container}>
         <View style={styles.actionRow}>
+          {/* WHERE TO */}
           <Link href={"/(modals)/where-to"} asChild>
             <TouchableOpacity>
               <View style={styles.searchBtn}>
@@ -53,9 +51,13 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
               </View>
             </TouchableOpacity>
           </Link>
-          <TouchableOpacity style={styles.filterBtn}>
-            <Ionicons name="options-outline" size={24} />
-          </TouchableOpacity>
+
+          {/* Filter*/}
+          <Link href={"/(modals)/filter"} asChild>
+            <TouchableOpacity style={styles.filterBtn}>
+              <Ionicons name="options-outline" size={24} />
+            </TouchableOpacity>
+          </Link>
         </View>
 
         <ScrollView
