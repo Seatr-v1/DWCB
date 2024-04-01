@@ -1,5 +1,5 @@
  <p align="center">
-  <img width="1000" src="./assets/images/seatr-app-logo.png">
+
 </p>
 
 ## Run Seatr using CLI TWO
